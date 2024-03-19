@@ -1,7 +1,7 @@
 {
   "name": "coffee-delivery",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry",
   "scripts": {
     "tunnel": "npx expo start --tunnel",
     "start": "expo start",
@@ -10,10 +10,20 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/baloo-2": "^0.2.3",
+    "@expo-google-fonts/roboto": "^0.2.3",
+    "@types/styled-components": "^5.1.34",
     "expo": "^49.0.23",
+    "expo-router": "^2.0.0",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
-    "react-native": "0.72.10"
+    "react-hook-form": "^7.51.1",
+    "react-native": "0.72.10",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-reanimated": "~3.3.0",
+    "styled-components": "^6.1.8",
+    "yup": "^1.4.0",
+    "expo-linking": "~5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
