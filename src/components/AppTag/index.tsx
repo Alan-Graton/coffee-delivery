@@ -10,7 +10,7 @@ interface IProps {
 
 export function AppTag({ title, isChecked = false, disabled = false }: IProps) {
   return (
-    <S.Tag>
+    <S.Tag isChecked={isChecked} disabled={disabled}>
       <S.Title>{title}</S.Title>
     </S.Tag>
   );

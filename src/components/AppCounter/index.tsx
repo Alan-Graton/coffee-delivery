@@ -2,12 +2,14 @@ import React from "react";
 
 import { Minus, Plus } from "phosphor-react-native";
 
-import { Text } from "react-native";
+import { Text, ViewProps } from "react-native";
 
 import * as S from "./styles";
 import { useTheme } from "styled-components/native";
 
-export function AppCounter() {
+interface IProps extends ViewProps {}
+
+export function AppCounter({ ...rest }: ViewProps) {
   const { COLORS } = useTheme();
 
   const [counter, setCounter] = React.useState<number>(0);
@@ -24,7 +26,7 @@ export function AppCounter() {
 
   return (
     <>
-      <S.Container>
+      <S.Container {...rest}>
         <S.IconButton onPress={sub}>
           <Minus size={20} color={COLORS.PURPLE} />
         </S.IconButton>

@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components/native";
 
-export const Tag = styled.Pressable`
+interface IStyleProps {
+  isChecked?: boolean;
+  disabled?: boolean;
+}
+
+export const Tag = styled.Pressable<IStyleProps>`
   width: 75px;
 
   align-items: center;
@@ -10,11 +15,13 @@ export const Tag = styled.Pressable`
 
   padding: 6px;
 
-  background-color: ${({ theme }) => theme.COLORS.GRAY_700};
+  background-color: ${({ theme, disabled }) =>
+    !disabled && theme.COLORS.GRAY_200};
 `;
 
 export const Title = styled.Text`
   color: ${({ theme }) => theme.COLORS.WHITE};
 
   font-size: 10px;
+  font-weight: bold;
 `;

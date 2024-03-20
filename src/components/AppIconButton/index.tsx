@@ -1,15 +1,13 @@
 import React from "react";
 
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
+
+import * as S from "./styles";
 
 interface IProps extends TouchableOpacityProps {
   children: React.JSX.Element;
 }
 
 export function AppIconButton({ children, ...rest }: IProps) {
-  return (
-    <TouchableOpacity style={{ padding: 10 }} {...rest}>
-      {children}
-    </TouchableOpacity>
-  );
+  return <S.Button {...rest}>{children}</S.Button>;
 }
