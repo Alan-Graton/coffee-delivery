@@ -12,18 +12,24 @@ export function AppCounter() {
 
   const [counter, setCounter] = React.useState<number>(0);
 
-  function add() {}
+  function add() {
+    setCounter((prevState) => (prevState += 1));
+  }
 
-  function sub() {}
+  function sub() {
+    if (counter === 0) return;
+
+    setCounter((prevState) => (prevState -= 1));
+  }
 
   return (
     <>
       <S.Container>
-        <S.IconButton>
+        <S.IconButton onPress={sub}>
           <Minus size={20} color={COLORS.PURPLE} />
         </S.IconButton>
         <Text>{counter}</Text>
-        <S.IconButton>
+        <S.IconButton onPress={add}>
           <Plus size={20} color={COLORS.PURPLE} />
         </S.IconButton>
       </S.Container>
