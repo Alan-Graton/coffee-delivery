@@ -15,6 +15,9 @@ import * as S from "./styles";
 import { MillilitersCards } from "./components/MillilitersCards";
 
 export default function DrinkDetails() {
+  const [selectedMilliliters, setSelectedMilliliters] =
+    React.useState<string>("");
+
   return (
     <>
       <S.Container>
@@ -43,9 +46,21 @@ export default function DrinkDetails() {
         <Text>Selecione o tamanho:</Text>
 
         <S.MlCardsContainer>
-          <MillilitersCards title="114ml" />
-          <MillilitersCards title="140ml" />
-          <MillilitersCards title="227ml" />
+          <MillilitersCards
+            title="114ml"
+            onPress={() => setSelectedMilliliters("114ml")}
+            isChecked={selectedMilliliters === "114ml"}
+          />
+          <MillilitersCards
+            title="140ml"
+            onPress={() => setSelectedMilliliters("140ml")}
+            isChecked={selectedMilliliters === "140ml"}
+          />
+          <MillilitersCards
+            title="227ml"
+            onPress={() => setSelectedMilliliters("227ml")}
+            isChecked={selectedMilliliters === "227ml"}
+          />
         </S.MlCardsContainer>
         <S.ActionsButtons>
           <AppCounter />

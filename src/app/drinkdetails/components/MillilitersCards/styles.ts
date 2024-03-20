@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components/native";
 
-export const CardButton = styled.TouchableOpacity`
+interface IStyleProps {
+  isChecked?: boolean;
+}
+
+export const CardButton = styled.TouchableOpacity<IStyleProps>`
   flex: 1;
 
   height: 50px;
@@ -10,7 +14,33 @@ export const CardButton = styled.TouchableOpacity`
 
   border-radius: 6px;
 
-  background-color: ${({ theme }) => theme.COLORS.GRAY_700};
+  ${({ theme, isChecked }) => {
+    if (isChecked) {
+      return `
+      background-color: ${theme.COLORS.WHITE};
+      border: 1px solid ${theme.COLORS.PURPLE};
+    `;
+    }
+
+    return `
+    background-color: ${theme.COLORS.GRAY_700};
+    border: none;
+  `;
+  }}
 `;
 
-export const Title = styled.Text``;
+export const Title = styled.Text<IStyleProps>`
+  ${({ theme, isChecked }) => {
+    if (isChecked) {
+      return `
+      color: ${theme.COLORS.PURPLE};
+      font-weight: bold;
+    `;
+    }
+
+    return `
+    color: ${theme.COLORS.GRAY_100};
+    font-weight: normal;
+  `;
+  }}
+`;
