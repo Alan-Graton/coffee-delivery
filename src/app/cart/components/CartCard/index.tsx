@@ -1,12 +1,10 @@
 import React from "react";
 
-import { Image, Text, View } from "react-native";
-
-import { AppCounter } from "@/components/AppCounter";
-import { AppIconButton } from "@/components/AppIconButton";
+import { Text, View } from "react-native";
 
 import { Trash } from "phosphor-react-native";
 
+import * as S from "./styles";
 import { useTheme } from "styled-components/native";
 
 interface IProps {}
@@ -16,56 +14,26 @@ export function CartCard() {
 
   return (
     <>
-      <View
-        style={{
-          backgroundColor: COLORS.WHITE,
-          flex: 1,
-          width: "100%",
-          borderBottomWidth: 1,
-          borderBottomColor: COLORS.GRAY_600,
-          padding: 32,
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 20,
-        }}
-      >
-        <Image
-          source={require("@/assets/drinks/Irlandes.png")}
-          style={{ width: 64, height: 64 }}
-        />
+      <S.Card>
+        <S.DrinkImg source={require("@/assets/drinks/Irlandes.png")} />
         <View style={{ flex: 1, gap: 8 }}>
           <View style={{ gap: 2 }}>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
+            <S.DrinkDetails>
               <Text>Irlandês</Text>
               <Text>R$ 9,90</Text>
-            </View>
+            </S.DrinkDetails>
             <View>
               <Text>227ml</Text>
             </View>
           </View>
-          <View style={{ flexDirection: "row", gap: 8 }}>
-            <AppCounter
-              style={{
-                maxWidth: 100,
-                borderWidth: 1,
-                borderColor: COLORS.GRAY_600,
-                borderRadius: 6,
-              }}
-            />
-            <AppIconButton
-              style={{ backgroundColor: COLORS.GRAY_700, borderRadius: 6 }}
-            >
+          <S.Actions>
+            <S.Counter />
+            <S.IconButton>
               <Trash size={20} color={COLORS.PURPLE} />
-            </AppIconButton>
-          </View>
+            </S.IconButton>
+          </S.Actions>
         </View>
-      </View>
+      </S.Card>
     </>
   );
 }
