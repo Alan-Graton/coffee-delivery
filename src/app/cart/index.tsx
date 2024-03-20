@@ -6,10 +6,11 @@ import { CartCard } from "./components/CartCard";
 import { AppButton } from "@/components/AppButton";
 
 import * as S from "./styles";
+import { router } from "expo-router";
 
 export default function Cart() {
   const [content, setContent] = React.useState<Array<any>>(
-    Array.from({ length: 20 })
+    Array.from({ length: 10 })
   );
 
   // SHADOWS
@@ -40,6 +41,7 @@ export default function Cart() {
             title="CONFIRMAR PEDIDO"
             type="SECONDARY"
             style={{ maxHeight: 55 }}
+            onPress={() => router.push("/orderfeedback/")}
           />
         </S.StickyFooter>
       </S.Container>
