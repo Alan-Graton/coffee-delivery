@@ -26,7 +26,7 @@ export default function Cart() {
       <S.Container>
         <FlatList
           data={content}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
           renderItem={() => <CartCard />}
           style={{ flex: 1, width: "100%" }}
