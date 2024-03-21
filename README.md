@@ -8,6 +8,13 @@ Ao selecionar um café o usuário é redirecionado para a Home, e um novo compon
 
 - [ ] Desenvolvimento das telas
   - [ ] Home
+  - [X] Coffee Details
+  - [X] Cart
+  - [X] Coffee Confirmed
+
+- [ ] Desenvolvimento das Animações
+  - [ ] Splash Screen
+  - [ ] Home
   - [ ] Coffee Details
-  - [ ] Cart
+  - [ ] Card
   - [ ] Coffee Confirmed
