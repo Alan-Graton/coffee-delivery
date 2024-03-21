@@ -6,12 +6,17 @@ interface IStyleProps {
 }
 
 export const Tag = styled.Pressable<IStyleProps>`
-  width: 75px;
+  /* width: 75px; */
 
   align-items: center;
   justify-content: center;
 
-  border-radius: 6px;
+  /* padding: 10px; */
+
+  height: 25px;
+
+  /* border-radius: 6px; */
+  border-radius: 100px;
 
   padding: 6px;
 
