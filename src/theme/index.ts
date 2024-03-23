@@ -23,15 +23,25 @@ export const THEME = {
     RED: "#E8BAAB",
     RED_LIGHT: "#F2DFD8",
   },
-  // FONT_SIZE: {
-  //   xls: 12,
-  //   sm: 14,
-  //   md: 16,
-  //   lg: 20,
-  //   xlg: 24,
-  // },
-  // FONT_FAMILY: {
-  //   HEADING: "Karla_700Bold",
-  //   BODY: "Karla_400Regular",
-  // },
+  FONT_SIZE: {
+    TITLE_XL: 36,
+    TITLE_LG: 24,
+    TITLE_MD: 20,
+    TITLE_SM: 16,
+    TITLE_XS: 14,
+
+    TEXT_LG: 20,
+    TEXT_MD: 16,
+    TEXT_SM: 14,
+    TEXT_XS: 12,
+
+    TAG: 10,
+    BUTTON: 14,
+  },
+  FONT_FAMILY: {
+    HEADING: "Baloo2_700Bold",
+    BODY: "Roboto_400Regular",
+    TAG: "Roboto_700Bold",
+    BUTTON: "Roboto_700Bold",
+  },
 };
