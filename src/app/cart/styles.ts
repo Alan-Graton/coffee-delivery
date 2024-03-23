@@ -44,3 +44,21 @@ export const TotalPrice = styled.Text`
     font-family: ${theme.FONT_FAMILY.HEADING};
   `}
 `;
+
+export const EmptyListContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+
+  gap: 32px;
+  padding: 16px;
+
+  margin-top: 64px;
+`;
+
+export const EmptyListTitle = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_400};
+    font-size: ${theme.FONT_SIZE.TEXT_SM}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
+`;
