@@ -25,6 +25,9 @@ export const Button = styled.TouchableOpacity<IProps>`
 `;
 
 export const Title = styled.Text`
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  font-size: 14px;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
+    font-size: ${theme.FONT_SIZE.BUTTON}px;
+    font-family: ${theme.FONT_FAMILY.BUTTON};
+  `}
 `;

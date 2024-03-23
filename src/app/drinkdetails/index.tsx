@@ -43,7 +43,7 @@ export default function DrinkDetails() {
         </S.Content>
       </S.Container>
       <S.Footer>
-        <Text>Selecione o tamanho:</Text>
+        <S.QuantityLabel>Selecione o tamanho:</S.QuantityLabel>
 
         <S.MlCardsContainer>
           <MillilitersCards

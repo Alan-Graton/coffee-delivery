@@ -1,14 +1,16 @@
-import { AppTag } from "@/components/AppTag";
 import React from "react";
+import { router } from "expo-router";
 
 import { View } from "react-native";
+
+import { AppTag } from "@/components/AppTag";
 
 import * as S from "./styles";
 
 export function RecommendationCard() {
   return (
     <>
-      <S.Card>
+      <S.Card onPress={() => router.push("/drinkdetails/")}>
         <View style={{ gap: 8 }}>
           <S.DrinkImg source={require("@/assets/drinks/Latte.png")} />
           <AppTag title="TRADICIONAL" />

@@ -34,8 +34,8 @@ export default function Cart() {
         />
         <S.StickyFooter>
           <S.StickyFooterDetails>
-            <Text>Valor total</Text>
-            <Text>R$ 9,90</Text>
+            <S.StickyFooterLabel>Valor total</S.StickyFooterLabel>
+            <S.TotalPrice>R$ 9,90</S.TotalPrice>
           </S.StickyFooterDetails>
           <AppButton
             title="CONFIRMAR PEDIDO"

@@ -9,6 +9,15 @@ export const Container = styled.View`
   justify-content: space-evenly;
 `;
 
+export const Title = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_100};
+
+    font-size: ${theme.FONT_SIZE.TEXT_MD}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
+`;
+
 export const IconButton = styled(AppIconButton)`
   padding: 10px;
 `;

@@ -28,3 +28,19 @@ export const StickyFooter = styled.View`
 
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
+
+export const StickyFooterLabel = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_200};
+    font-size: ${theme.FONT_SIZE.TEXT_MD}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
+`;
+
+export const TotalPrice = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_200};
+    font-size: ${theme.FONT_SIZE.TITLE_MD}px;
+    font-family: ${theme.FONT_FAMILY.HEADING};
+  `}
+`;

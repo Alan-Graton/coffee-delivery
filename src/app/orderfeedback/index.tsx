@@ -1,4 +1,5 @@
 import React from "react";
+import { router } from "expo-router";
 
 import { View } from "react-native";
 
@@ -20,7 +21,10 @@ export default function OrderFeedback() {
           </S.Subtitle>
         </View>
         <S.Footer>
-          <AppButton title="IR PARA HOME" />
+          <AppButton
+            title="IR PARA HOME"
+            onPress={() => router.push("/(home)")}
+          />
         </S.Footer>
       </S.Container>
     </>

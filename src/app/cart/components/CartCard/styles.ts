@@ -13,7 +13,7 @@ export const Card = styled.View`
 
   ${({ theme }) => css`
     background-color: ${theme.COLORS.WHITE};
-    border-bottom-color: ${theme.COLORS.GRAY_600};
+    border-bottom-color: ${theme.COLORS.GRAY_900};
   `}
 
   border-bottom-width: 1px;
@@ -31,6 +31,30 @@ export const DrinkDetails = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const Title = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_100};
+    font-size: ${theme.FONT_SIZE.TEXT_MD}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
+`;
+
+export const Price = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_100};
+    font-size: ${theme.FONT_SIZE.TITLE_SM}px;
+    font-family: ${theme.FONT_FAMILY.HEADING};
+  `}
+`;
+
+export const Quantity = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_400};
+    font-size: ${theme.FONT_SIZE.TEXT_SM}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
 `;
 
 export const Actions = styled.View`

@@ -19,11 +19,11 @@ export function CartCard() {
         <View style={{ flex: 1, gap: 8 }}>
           <View style={{ gap: 2 }}>
             <S.DrinkDetails>
-              <Text>Irlandês</Text>
-              <Text>R$ 9,90</Text>
+              <S.Title>Irlandês</S.Title>
+              <S.Price>R$ 9,90</S.Price>
             </S.DrinkDetails>
             <View>
-              <Text>227ml</Text>
+              <S.Quantity>227ml</S.Quantity>
             </View>
           </View>
           <S.Actions>

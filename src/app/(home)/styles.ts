@@ -16,7 +16,7 @@ export const Title = styled.Text`
   text-align: left;
 
   ${({ theme }) => css`
-    font-size: ${theme.FONT_SIZE.TITLE_MD};
+    font-size: ${theme.FONT_SIZE.TITLE_MD}px;
     font-family: ${theme.FONT_FAMILY.HEADING};
   `}
 `;

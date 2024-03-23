@@ -25,8 +25,10 @@ export const Tag = styled.Pressable<IStyleProps>`
 `;
 
 export const Title = styled.Text`
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
 
-  font-size: 10px;
-  font-weight: bold;
+    font-size: ${theme.FONT_SIZE.TAG}px;
+    font-family: ${theme.FONT_FAMILY.TAG};
+  `}
 `;

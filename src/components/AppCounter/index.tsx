@@ -30,7 +30,7 @@ export function AppCounter({ ...rest }: ViewProps) {
         <S.IconButton onPress={sub}>
           <Minus size={20} color={COLORS.PURPLE} />
         </S.IconButton>
-        <Text>{counter}</Text>
+        <S.Title>{counter}</S.Title>
         <S.IconButton onPress={add}>
           <Plus size={20} color={COLORS.PURPLE} />
         </S.IconButton>

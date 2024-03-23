@@ -23,6 +23,10 @@ export const Input = styled.TextInput.attrs(({ theme }) => ({
   width: 100%;
   height: 42px;
 
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BODY};
+
+  font-size: ${({ theme }) => theme.FONT_SIZE.TEXT_SM}px;
+
   border-radius: 4px;
 
   ${({ theme }) => css`

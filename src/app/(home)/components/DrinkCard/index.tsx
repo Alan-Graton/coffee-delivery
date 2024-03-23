@@ -1,4 +1,5 @@
 import React from "react";
+import { router } from "expo-router";
 
 import * as S from "./styles";
 
@@ -9,7 +10,7 @@ interface IProps {
 export function DrinkCard({ item }: IProps) {
   return (
     <>
-      <S.Card>
+      <S.Card onPress={() => router.push("/drinkdetails/")}>
         <S.DrinkImg source={require("@/assets/drinks/Capuccino.png")} />
 
         <S.About>

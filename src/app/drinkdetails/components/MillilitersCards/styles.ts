@@ -34,13 +34,15 @@ export const Title = styled.Text<IStyleProps>`
     if (isChecked) {
       return `
       color: ${theme.COLORS.PURPLE};
-      font-weight: bold;
+      font-size: ${theme.FONT_SIZE.BUTTON}px;
+      font-family: ${theme.FONT_FAMILY.BUTTON};
     `;
     }
 
     return `
-    color: ${theme.COLORS.GRAY_100};
-    font-weight: normal;
+    color: ${theme.COLORS.GRAY_300};
+    font-size: ${theme.FONT_SIZE.TEXT_SM}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
   `;
   }}
 `;

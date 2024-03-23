@@ -26,17 +26,21 @@ export const TitleContainer = styled.View`
 `;
 
 export const DrinkName = styled.Text`
-  font-size: 24px;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
 
-  color: ${({ theme }) => theme.COLORS.WHITE};
-
-  font-weight: bold;
+    font-size: ${theme.FONT_SIZE.TITLE_LG}px;
+    font-family: ${theme.FONT_FAMILY.HEADING};
+  `}
 `;
 
 export const DrinkPrice = styled.Text`
-  font-size: 36px;
-  color: ${({ theme }) => theme.COLORS.YELLOW};
-  font-weight: bold;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.YELLOW};
+
+    font-size: ${theme.FONT_SIZE.TITLE_XL}px;
+    font-family: ${theme.FONT_FAMILY.HEADING};
+  `}
 `;
 
 export const DollarSign = styled.Text`
@@ -48,9 +52,9 @@ export const DollarSign = styled.Text`
 export const DrinkDescription = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.WHITE};
+    font-size: ${theme.FONT_SIZE.TEXT_MD}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
   `}
-
-  font-size: 16px;
 `;
 
 export const Body = styled.View`
@@ -73,6 +77,14 @@ export const Footer = styled.View`
   padding: 16px;
 
   background-color: ${({ theme }) => theme.COLORS.WHITE};
+`;
+
+export const QuantityLabel = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_400};
+    font-size: ${theme.FONT_SIZE.TEXT_SM}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
 `;
 
 export const MlCardsContainer = styled.View`
