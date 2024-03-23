@@ -1,53 +1,34 @@
 import React, { useState } from "react";
 
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  SectionList,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, SectionList } from "react-native";
 
 import { AppInput } from "@/components/AppInput";
 import { AppTag } from "@/components/AppTag";
 
 import { RecommendationCard } from "./components/RecommendationCard";
+import { DrinkCard } from "./components/DrinkCard";
 
 import * as S from "./styles";
-import { useTheme } from "styled-components/native";
 
 export default function Home() {
-  const { COLORS, FONT_SIZE, FONT_FAMILY } = useTheme();
-
   const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
   );
 
   const [drinks, setDrinks] = useState<Array<{ title: ""; data: Array<any> }>>(
+    // TODO: Add path das imagens das bebidas
     require("@/mock/drinks.json")
   );
 
   return (
     <>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 16,
-        }}
-        style={{ flex: 1, backgroundColor: COLORS.WHITE }}
-      >
-        <View className="search-bar">
-          <Text
-            style={{
-              textAlign: "left",
-              fontSize: FONT_SIZE.TITLE_MD,
-              fontFamily: FONT_FAMILY.HEADING,
-            }}
-          >
+      <S.Container>
+        <S.SearchBar>
+          <S.Title>
             Encontre o café perfeito para {"\n"} qualquer hora do dia
-          </Text>
+          </S.Title>
           <AppInput placeholder="Pesquisar" />
-        </View>
+        </S.SearchBar>
 
         <FlatList
           data={recommended}
@@ -56,134 +37,39 @@ export default function Home() {
           showsHorizontalScrollIndicator={false}
           renderItem={() => <RecommendationCard />}
           contentContainerStyle={{ gap: 32 }}
-          style={{ padding: 16 }}
+          style={{ marginTop: 16, marginBottom: 32 }}
         />
 
-        <View
-          style={{
-            width: "100%",
-            paddingHorizontal: 32,
-            paddingVertical: 16,
-            gap: 12,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: FONT_SIZE.TITLE_SM,
-              fontFamily: FONT_FAMILY.HEADING,
-              color: COLORS.GRAY_300,
-            }}
-          >
-            Nossos cafés
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              gap: 8,
-              alignItems: "flex-end",
-            }}
-          >
-            <AppTag title="TRADICIONAIS" />
-            <AppTag title="DOCES" />
-            <AppTag title="ESPECIAIS" />
-          </View>
-        </View>
+        <S.FilterBar>
+          <S.FilterTitle>Nossos cafés</S.FilterTitle>
+          <S.Filters>
+            <AppTag
+              title="TRADICIONAIS"
+              style={{ flex: 1, maxWidth: 90, height: 25 }}
+            />
+            <AppTag
+              title="DOCES"
+              style={{ flex: 1, maxWidth: 90, height: 25 }}
+            />
+            <AppTag
+              title="ESPECIAIS"
+              style={{ flex: 1, maxWidth: 90, height: 25 }}
+            />
+          </S.Filters>
+        </S.FilterBar>
 
         <SectionList
           sections={drinks}
           keyExtractor={(item, index) => item.drink}
           renderSectionHeader={({ section: { title } }) => (
-            <View
-              style={
-                {
-                  // paddingHorizontal: 32,
-                  // paddingVertical: 16,
-                }
-              }
-            >
-              <Text
-                style={{
-                  color: COLORS.GRAY_400,
-                  fontSize: FONT_SIZE.TITLE_XS,
-                  fontFamily: FONT_FAMILY.HEADING,
-                }}
-              >
-                {title}
-              </Text>
-            </View>
+            <S.DrinkSectionTitle>{title}</S.DrinkSectionTitle>
           )}
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                width: 311,
-                height: 120,
-                backgroundColor: COLORS.GRAY_800,
-                borderTopLeftRadius: 6,
-                borderTopRightRadius: 36,
-                borderBottomLeftRadius: 36,
-                borderBottomRightRadius: 6,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Image
-                source={require("@/assets/drinks/Capuccino.png")}
-                style={{ width: 76, height: 76, marginLeft: 14 }}
-              />
-
-              <View
-                style={{
-                  // backgroundColor: "red",
-                  flex: 1,
-                  paddingHorizontal: 32,
-                }}
-              >
-                <Text
-                  style={{
-                    color: COLORS.GRAY_200,
-                    fontSize: FONT_SIZE.TITLE_SM,
-                    fontFamily: FONT_FAMILY.HEADING,
-                  }}
-                >
-                  {item.drink}
-                </Text>
-                <Text
-                  style={{
-                    color: COLORS.GRAY_400,
-                    fontSize: FONT_SIZE.TEXT_XS,
-                    fontFamily: FONT_FAMILY.BODY,
-                  }}
-                >
-                  {item.description}
-                </Text>
-                <Text
-                  style={{
-                    color: COLORS.YELLOW_DARK,
-                    fontSize: FONT_SIZE.TITLE_MD,
-                    fontFamily: FONT_FAMILY.HEADING,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: COLORS.YELLOW_DARK,
-                      fontSize: FONT_SIZE.TEXT_SM,
-                      fontFamily: FONT_FAMILY.BODY,
-                    }}
-                  >
-                    R$
-                  </Text>
-                  {item.price}
-                </Text>
-              </View>
-            </View>
-          )}
+          renderItem={({ item, index }) => <DrinkCard item={item} />}
           contentContainerStyle={{
             gap: 32,
-            padding: 16,
           }}
         />
-      </ScrollView>
+      </S.Container>
     </>
   );
 }
