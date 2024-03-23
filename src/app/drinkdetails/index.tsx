@@ -23,7 +23,7 @@ export default function DrinkDetails() {
       <S.Container>
         <S.Content>
           <S.Header>
-            <AppTag title="ESPECIAL" style={{ maxWidth: 70 }} />
+            <AppTag title="ESPECIAL" disabled style={{ maxWidth: 70 }} />
 
             <S.TitleContainer>
               <S.DrinkName>Irlandês</S.DrinkName>
