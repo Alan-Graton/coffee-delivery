@@ -1,21 +1,23 @@
 import styled, { css } from "styled-components/native";
 
 export const Container = styled.ScrollView.attrs(({ theme }) => ({
-  contentContainerStyle: {
-    padding: 16,
-  },
   showsVerticalScrollIndicator: false,
 }))`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
-export const SearchBar = styled.View``;
+export const SearchBar = styled.View`
+  background-color: ${({ theme }) => theme.COLORS.GRAY_100};
+
+  padding: 32px;
+`;
 
 export const Title = styled.Text`
   text-align: left;
 
   ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
     font-size: ${theme.FONT_SIZE.TITLE_MD}px;
     font-family: ${theme.FONT_FAMILY.HEADING};
   `}
@@ -25,7 +27,8 @@ export const FilterBar = styled.View`
   width: 100%;
 
   gap: 12px;
-  margin-bottom: 32px;
+
+  padding: 32px;
 `;
 
 export const FilterTitle = styled.Text`

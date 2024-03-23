@@ -15,6 +15,10 @@ export default function Home() {
     Array.from({ length: 5 })
   );
 
+  const [selectedFilter, setSelectedFilter] = useState<
+    "TRADICIONAIS" | "DOCES" | "ESPECIAIS" | ""
+  >("");
+
   const [drinks, setDrinks] = useState<Array<{ title: ""; data: Array<any> }>>(
     // TODO: Add path das imagens das bebidas
     require("@/mock/drinks.json")
@@ -35,9 +39,13 @@ export default function Home() {
           keyExtractor={(item, index) => String(index)}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={() => <RecommendationCard />}
+          renderItem={({ item, index }) => <RecommendationCard index={index} />}
           contentContainerStyle={{ gap: 32 }}
-          style={{ marginTop: 16, marginBottom: 32 }}
+          style={{
+            paddingHorizontal: 32,
+            position: "relative",
+            top: -30,
+          }}
         />
 
         <S.FilterBar>
@@ -45,15 +53,24 @@ export default function Home() {
           <S.Filters>
             <AppTag
               title="TRADICIONAIS"
-              style={{ flex: 1, maxWidth: 90, height: 25 }}
+              variant="selectable"
+              isChecked={selectedFilter === "TRADICIONAIS"}
+              onPress={() => setSelectedFilter("TRADICIONAIS")}
+              style={{ flex: 1, maxWidth: 90 }}
             />
             <AppTag
               title="DOCES"
-              style={{ flex: 1, maxWidth: 90, height: 25 }}
+              variant="selectable"
+              isChecked={selectedFilter === "DOCES"}
+              onPress={() => setSelectedFilter("DOCES")}
+              style={{ flex: 1, maxWidth: 90 }}
             />
             <AppTag
               title="ESPECIAIS"
-              style={{ flex: 1, maxWidth: 90, height: 25 }}
+              variant="selectable"
+              isChecked={selectedFilter === "ESPECIAIS"}
+              onPress={() => setSelectedFilter("ESPECIAIS")}
+              style={{ flex: 1, maxWidth: 90 }}
             />
           </S.Filters>
         </S.FilterBar>
@@ -67,6 +84,7 @@ export default function Home() {
           renderItem={({ item, index }) => <DrinkCard item={item} />}
           contentContainerStyle={{
             gap: 32,
+            padding: 32,
           }}
         />
       </S.Container>

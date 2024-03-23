@@ -7,13 +7,20 @@ import { AppTag } from "@/components/AppTag";
 
 import * as S from "./styles";
 
-export function RecommendationCard() {
+interface IProps {
+  index: number;
+}
+
+export function RecommendationCard({ index }: IProps) {
   return (
     <>
-      <S.Card onPress={() => router.push("/drinkdetails/")}>
+      <S.Card
+        onPress={() => router.push("/drinkdetails/")}
+        style={index === 4 && { marginRight: 60 }}
+      >
         <View style={{ gap: 8 }}>
           <S.DrinkImg source={require("@/assets/drinks/Latte.png")} />
-          <AppTag title="TRADICIONAL" />
+          <AppTag title="TRADICIONAL" variant="ghost" />
         </View>
 
         <View style={{ alignItems: "center", gap: 4 }}>
