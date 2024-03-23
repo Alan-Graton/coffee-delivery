@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Tradicionais",
+    "data": [
+      {
+        "drink": "Espresso Tradicional",
+        "description": "Clássico café extraído com pressão, ideal para quem aprecia um sabor intenso",
+        "price": "9,90"
+      },
+      {
+        "drink": "Espresso Americano",
+        "description": "Espresso diluído em água quente, para um sabor mais suave",
+        "price": "9,90"
+      },
+      {
+        "drink": "Espresso Cremoso",
+        "description": "Espresso com espuma de leite, para um toque cremoso e saboroso",
+        "price": "9,90"
+      },
+      {
+        "drink": "Latte",
+        "description": "Combinação de espresso, leite vaporizado e espuma de leite, para um sabor equilibrado",
+        "price": "9,90"
+      },
+      {
+        "drink": "Espresso Gelado",
+        "description": "Espresso refrescante, perfeito para os dias mais quentes",
+        "price": "9,90"
+      }
+    ]
+  },
+  {
+    "title": "Doces",
+    "data": [
+      {
+        "drink": "Capuccino",
+        "description": "Espresso com leite vaporizado e chocolate em pó, para um sabor clássico e delicioso",
+        "price": "5,90"
+      },
+      {
+        "drink": "Mochaccino",
+        "description": "Espresso com leite vaporizado, chocolate em pó e calda de chocolate, para um sabor intenso e doce",
+        "price": "9,90"
+      },
+      {
+        "drink": "Chocolate Quente",
+        "description": "Cremoso chocolate quente, ideal para os dias mais frios",
+        "price": "9,90"
+      }
+    ]
+  },
+  {
+    "title": "Especiais",
+    "data": [
+      {
+        "drink": "Cubano",
+        "description": "Chocolate quente com rum e especiarias, para um sabor exótico e aromático",
+        "price": "9,90"
+      },
+      {
+        "drink": "Havaiano",
+        "description": "Chocolate quente com coco e abacaxi, para um sabor tropical e refrescante",
+        "price": "9,90"
+      },
+      {
+        "drink": "Árabe",
+        "description": "Chocolate quente com especiarias árabes, para um sabor intenso e aromático",
+        "price": "5,90"
+      },
+      {
+        "drink": "Irlandês",
+        "description": "Chocolate quente com whisky irlandês e creme de leite, para um sabor cremoso e alcoólico",
+        "price": "9,00"
+      }
+    ]
+  }
+]

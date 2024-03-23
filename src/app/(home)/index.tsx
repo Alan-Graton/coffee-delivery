@@ -1,30 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  SectionList,
+  Text,
+  View,
+} from "react-native";
 
 import { AppInput } from "@/components/AppInput";
-
-import { FlatList, ScrollView, Text, View } from "react-native";
 import { AppTag } from "@/components/AppTag";
 
-import * as S from "./styles";
 import { RecommendationCard } from "./components/RecommendationCard";
 
+import * as S from "./styles";
+import { useTheme } from "styled-components/native";
+
 export default function Home() {
-  const [recommended, setRecommended] = React.useState<Array<any>>(
+  const { COLORS, FONT_SIZE, FONT_FAMILY } = useTheme();
+
+  const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
+  );
+
+  const [drinks, setDrinks] = useState<Array<{ title: ""; data: Array<any> }>>(
+    require("@/mock/drinks.json")
   );
 
   return (
     <>
       <ScrollView
         contentContainerStyle={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "space-between",
           padding: 16,
         }}
+        style={{ flex: 1, backgroundColor: COLORS.WHITE }}
       >
         <View className="search-bar">
-          <Text style={{ textAlign: "left", fontSize: 20, fontWeight: "bold" }}>
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: FONT_SIZE.TITLE_MD,
+              fontFamily: FONT_FAMILY.HEADING,
+            }}
+          >
             Encontre o café perfeito para {"\n"} qualquer hora do dia
           </Text>
           <AppInput placeholder="Pesquisar" />
@@ -36,6 +55,8 @@ export default function Home() {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={() => <RecommendationCard />}
+          contentContainerStyle={{ gap: 32 }}
+          style={{ padding: 16 }}
         />
 
         <View
@@ -46,7 +67,15 @@ export default function Home() {
             gap: 12,
           }}
         >
-          <Text style={{ fontSize: 16, fontWeight: "bold" }}>Nossos cafés</Text>
+          <Text
+            style={{
+              fontSize: FONT_SIZE.TITLE_SM,
+              fontFamily: FONT_FAMILY.HEADING,
+              color: COLORS.GRAY_300,
+            }}
+          >
+            Nossos cafés
+          </Text>
           <View
             style={{
               flexDirection: "row",
@@ -58,8 +87,102 @@ export default function Home() {
             <AppTag title="DOCES" />
             <AppTag title="ESPECIAIS" />
           </View>
-          {/* TODO: SectionList */}
         </View>
+
+        <SectionList
+          sections={drinks}
+          keyExtractor={(item, index) => item.drink}
+          renderSectionHeader={({ section: { title } }) => (
+            <View
+              style={
+                {
+                  // paddingHorizontal: 32,
+                  // paddingVertical: 16,
+                }
+              }
+            >
+              <Text
+                style={{
+                  color: COLORS.GRAY_400,
+                  fontSize: FONT_SIZE.TITLE_XS,
+                  fontFamily: FONT_FAMILY.HEADING,
+                }}
+              >
+                {title}
+              </Text>
+            </View>
+          )}
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                width: 311,
+                height: 120,
+                backgroundColor: COLORS.GRAY_800,
+                borderTopLeftRadius: 6,
+                borderTopRightRadius: 36,
+                borderBottomLeftRadius: 36,
+                borderBottomRightRadius: 6,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Image
+                source={require("@/assets/drinks/Capuccino.png")}
+                style={{ width: 76, height: 76, marginLeft: 14 }}
+              />
+
+              <View
+                style={{
+                  // backgroundColor: "red",
+                  flex: 1,
+                  paddingHorizontal: 32,
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.GRAY_200,
+                    fontSize: FONT_SIZE.TITLE_SM,
+                    fontFamily: FONT_FAMILY.HEADING,
+                  }}
+                >
+                  {item.drink}
+                </Text>
+                <Text
+                  style={{
+                    color: COLORS.GRAY_400,
+                    fontSize: FONT_SIZE.TEXT_XS,
+                    fontFamily: FONT_FAMILY.BODY,
+                  }}
+                >
+                  {item.description}
+                </Text>
+                <Text
+                  style={{
+                    color: COLORS.YELLOW_DARK,
+                    fontSize: FONT_SIZE.TITLE_MD,
+                    fontFamily: FONT_FAMILY.HEADING,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: COLORS.YELLOW_DARK,
+                      fontSize: FONT_SIZE.TEXT_SM,
+                      fontFamily: FONT_FAMILY.BODY,
+                    }}
+                  >
+                    R$
+                  </Text>
+                  {item.price}
+                </Text>
+              </View>
+            </View>
+          )}
+          contentContainerStyle={{
+            gap: 32,
+            padding: 16,
+          }}
+        />
       </ScrollView>
     </>
   );
