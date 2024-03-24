@@ -49,7 +49,7 @@ export default function Cart() {
           )}
         />
         {content.length > 0 && (
-          <S.StickyFooter>
+          <S.StickyFooter style={{ elevation: 50 }}>
             <S.StickyFooterDetails>
               <S.StickyFooterLabel>Valor total</S.StickyFooterLabel>
               <S.TotalPrice>R$ 9,90</S.TotalPrice>

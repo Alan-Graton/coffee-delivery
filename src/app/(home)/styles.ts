@@ -1,5 +1,13 @@
 import styled, { css } from "styled-components/native";
 
+export const HeaderUserLocation = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
+    font-size: ${theme.FONT_SIZE.TEXT_SM}px;
+    font-family: ${theme.FONT_FAMILY.BODY};
+  `}
+`;
+
 export const Container = styled.ScrollView.attrs(({ theme }) => ({
   showsVerticalScrollIndicator: false,
 }))`
@@ -9,6 +17,9 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
 
 export const SearchBar = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
+
+  gap: 15px;
+  margin-bottom: 15px;
 
   padding: 32px;
 `;
@@ -21,6 +32,13 @@ export const Title = styled.Text`
     font-size: ${theme.FONT_SIZE.TITLE_MD}px;
     font-family: ${theme.FONT_FAMILY.HEADING};
   `}
+`;
+
+export const CoffeeBeans = styled.Image`
+  position: absolute;
+
+  bottom: -10px;
+  right: 0;
 `;
 
 export const FilterBar = styled.View`

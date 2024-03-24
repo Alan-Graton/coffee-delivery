@@ -32,6 +32,9 @@ export default function Home() {
             Encontre o café perfeito para {"\n"} qualquer hora do dia
           </S.Title>
           <AppInput placeholder="Pesquisar" />
+          <S.CoffeeBeans
+            source={require("@/assets/illustrations/coffee-beans.png")}
+          />
         </S.SearchBar>
 
         <FlatList
