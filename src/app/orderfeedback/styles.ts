@@ -2,6 +2,12 @@ import styled, { css } from "styled-components/native";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import Animated, {
+  SlideInLeft,
+  FadeIn,
+  FadeInDown,
+} from "react-native-reanimated";
+
 export const Container = styled(SafeAreaProvider)`
   flex: 1;
 
@@ -13,7 +19,19 @@ export const Container = styled(SafeAreaProvider)`
   justify-content: space-evenly;
 `;
 
-export const FeedbackImg = styled.Image``;
+export const AnimatedFeedbackImg = styled(Animated.Image).attrs(({}) => ({
+  entering: SlideInLeft.duration(800).springify(),
+}))``;
+
+export const AnimatedTextGroup = styled(Animated.View).attrs(({}) => ({
+  entering: FadeInDown.delay(400).duration(500),
+}))``;
+
+export const AnimatedFooter = styled(Animated.View).attrs(({}) => ({
+  entering: FadeIn.delay(600).duration(200),
+}))`
+  flex-direction: row;
+`;
 
 export const Title = styled.Text`
   ${({ theme }) => css`
@@ -33,8 +51,4 @@ export const Subtitle = styled.Text`
     font-size: ${theme.FONT_SIZE.TEXT_SM}px;
     font-family: ${theme.FONT_FAMILY.BODY};
   `}
-`;
-
-export const Footer = styled.View`
-  flex-direction: row;
 `;
