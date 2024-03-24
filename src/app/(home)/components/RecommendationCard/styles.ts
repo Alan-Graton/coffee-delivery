@@ -1,10 +1,17 @@
 import styled, { css } from "styled-components/native";
 
-export const Card = styled.Pressable`
+import Animated from "react-native-reanimated";
+import { Pressable } from "react-native";
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+export const Card = styled(AnimatedPressable)`
   background-color: ${({ theme }) => theme.COLORS.GRAY_800};
 
   width: 208px;
   height: 262px;
+  /* TODO: Remover isso, já que é só para testes */
+  max-height: 1500px;
 
   gap: 14px;
 

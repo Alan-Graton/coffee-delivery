@@ -1,22 +1,24 @@
 import React from "react";
 import { router } from "expo-router";
 
-import { View } from "react-native";
+import { PressableProps, View } from "react-native";
 
 import { AppTag } from "@/components/AppTag";
 
+import Animated from "react-native-reanimated";
 import * as S from "./styles";
 
-interface IProps {
+interface IProps extends Animated.AnimateProps<PressableProps> {
   index: number;
 }
 
-export function RecommendationCard({ index }: IProps) {
+export function RecommendationCard({ index, ...rest }: IProps) {
   return (
     <>
       <S.Card
         onPress={() => router.push("/drinkdetails/")}
         style={index === 4 && { marginRight: 60 }}
+        {...rest}
       >
         <View style={{ gap: 8 }}>
           <S.DrinkImg source={require("@/assets/drinks/Latte.png")} />

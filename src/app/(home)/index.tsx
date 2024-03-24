@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-import { FlatList, SectionList } from "react-native";
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  SectionList,
+  View,
+} from "react-native";
 
 import { AppInput } from "@/components/AppInput";
 import { AppTag } from "@/components/AppTag";
@@ -8,9 +13,28 @@ import { AppTag } from "@/components/AppTag";
 import { RecommendationCard } from "./components/RecommendationCard";
 import { DrinkCard } from "./components/DrinkCard";
 
+import Animated, {
+  SlideInRight,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from "react-native-reanimated";
+
+const AnimatedSectionList = Animated.createAnimatedComponent(
+  SectionList<
+    Array<{
+      title: "";
+      data: Array<{ drink: string; description: string; price: number }>;
+    }>
+  >
+);
+
 import * as S from "./styles";
 
 export default function Home() {
+  const scale = useSharedValue(1);
+  const scrollX = useSharedValue(0);
+
   const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
   );
@@ -23,6 +47,28 @@ export default function Home() {
     // TODO: Add path das imagens das bebidas
     require("@/mock/drinks.json")
   );
+
+  const onRecommendationsScroll = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      console.log("\n\nSCROLL EVENT: ", event);
+
+      const horizontalScrollCoords = event.contentOffset.x;
+
+      if (horizontalScrollCoords === 0) {
+        scale.value = 1.1;
+      }
+    },
+  });
+
+  const recommendationCardStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: scale.value,
+        },
+      ],
+    };
+  });
 
   return (
     <>
@@ -37,21 +83,33 @@ export default function Home() {
           />
         </S.SearchBar>
 
-        <FlatList
+        {/* TODO: Continuar lendo: https://medium.com/@islamrustamov/building-animations-with-rn-reanimated-v3-flatlist-with-animated-items-and-auto-centering-cb72cadf53ae */}
+        <Animated.FlatList
+          entering={SlideInRight.duration(1000)}
+          onScroll={onRecommendationsScroll}
+          scrollEventThrottle={16}
           data={recommended}
           keyExtractor={(item, index) => String(index)}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item, index }) => <RecommendationCard index={index} />}
+          renderItem={({ item, index }) => (
+            <>
+              <RecommendationCard
+                index={index}
+                // style={recommendationCardStyle}
+              />
+            </>
+          )}
           contentContainerStyle={{ gap: 32 }}
           style={{
             paddingHorizontal: 32,
+            paddingVertical: 32,
             position: "relative",
-            top: -30,
+            top: -60,
           }}
         />
 
-        <S.FilterBar>
+        <S.AnimatedFilterBar>
           <S.FilterTitle>Nossos cafés</S.FilterTitle>
           <S.Filters>
             <AppTag
@@ -76,11 +134,11 @@ export default function Home() {
               style={{ flex: 1, maxWidth: 90 }}
             />
           </S.Filters>
-        </S.FilterBar>
+        </S.AnimatedFilterBar>
 
-        <SectionList
+        <AnimatedSectionList
           sections={drinks}
-          keyExtractor={(item, index) => item.drink}
+          keyExtractor={(item) => item.drink}
           renderSectionHeader={({ section: { title } }) => (
             <S.DrinkSectionTitle>{title}</S.DrinkSectionTitle>
           )}

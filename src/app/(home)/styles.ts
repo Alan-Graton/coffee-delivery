@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components/native";
 
+import Animated, { SlideInDown } from "react-native-reanimated";
+
 export const HeaderUserLocation = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.WHITE};
@@ -41,13 +43,19 @@ export const CoffeeBeans = styled.Image`
   right: 0;
 `;
 
-export const FilterBar = styled.View`
+export const AnimatedFilterBar = styled(Animated.View).attrs(({}) => ({
+  entering: SlideInDown.delay(400).duration(800),
+}))`
   width: 100%;
 
   gap: 12px;
 
   padding: 32px;
 `;
+
+export const AnimatedDrinksList = styled(Animated.View).attrs(({}) => ({
+  entering: SlideInDown.delay(400).duration(800),
+}))``;
 
 export const FilterTitle = styled.Text`
   ${({ theme }) => css`
