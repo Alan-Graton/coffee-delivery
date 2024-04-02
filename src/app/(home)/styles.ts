@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components/native";
 
-import Animated, { SlideInDown } from "react-native-reanimated";
+import Animated, { SlideInUp, SlideInDown } from "react-native-reanimated";
 
 export const HeaderUserLocation = styled.Text`
   ${({ theme }) => css`
@@ -17,7 +17,9 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
-export const SearchBar = styled.View`
+export const AnimatedSearchBar = styled(Animated.View).attrs(({}) => ({
+  entering: SlideInUp.duration(330),
+}))`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 
   gap: 15px;

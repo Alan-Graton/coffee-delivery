@@ -33,7 +33,7 @@ import * as S from "./styles";
 
 export default function Home() {
   const scale = useSharedValue(1);
-  const scrollX = useSharedValue(0);
+  const scrollY = useSharedValue(0);
 
   const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
@@ -44,36 +44,25 @@ export default function Home() {
   >("");
 
   const [drinks, setDrinks] = useState<Array<{ title: ""; data: Array<any> }>>(
-    // TODO: Add path das imagens das bebidas
     require("@/mock/drinks.json")
   );
 
   const onRecommendationsScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
-      console.log("\n\nSCROLL EVENT: ", event);
+      const verticalScrollCoords = event.contentOffset.y;
 
-      const horizontalScrollCoords = event.contentOffset.x;
-
-      if (horizontalScrollCoords === 0) {
-        scale.value = 1.1;
-      }
+      console.log("Vertical Scroll Coords: ", verticalScrollCoords);
     },
   });
 
-  const recommendationCardStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          scale: scale.value,
-        },
-      ],
-    };
+  const animatedStyles = useAnimatedStyle(() => {
+    return {};
   });
 
   return (
     <>
       <S.Container>
-        <S.SearchBar>
+        <S.AnimatedSearchBar>
           <S.Title>
             Encontre o café perfeito para {"\n"} qualquer hora do dia
           </S.Title>
@@ -81,7 +70,7 @@ export default function Home() {
           <S.CoffeeBeans
             source={require("@/assets/illustrations/coffee-beans.png")}
           />
-        </S.SearchBar>
+        </S.AnimatedSearchBar>
 
         {/* TODO: Continuar lendo: https://medium.com/@islamrustamov/building-animations-with-rn-reanimated-v3-flatlist-with-animated-items-and-auto-centering-cb72cadf53ae */}
         <Animated.FlatList
@@ -91,6 +80,7 @@ export default function Home() {
           data={recommended}
           keyExtractor={(item, index) => String(index)}
           horizontal
+          pagingEnabled
           showsHorizontalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <>
