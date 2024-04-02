@@ -32,7 +32,7 @@ export default function HomeLayout() {
         header: () => (
           <AnimatedScreenHeader
             color={"GRAY_100"}
-            entering={SlideInUp.duration(200)}
+            entering={SlideInUp.duration(300)}
           >
             <View style={{ flexDirection: "row", gap: 4 }}>
               <MapPin size={20} color={COLORS.PURPLE} weight="fill" />

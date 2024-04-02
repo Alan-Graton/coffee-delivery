@@ -10,15 +10,19 @@ export const HeaderUserLocation = styled.Text`
   `}
 `;
 
-export const Container = styled.ScrollView.attrs(({ theme }) => ({
+export const Container = styled.ScrollView.attrs(({}) => ({
   showsVerticalScrollIndicator: false,
 }))`
   flex: 1;
+  background-color: ${({ theme }) => theme.COLORS.GRAY_100};
+`;
+
+export const Content = styled.View`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
 export const AnimatedSearchBar = styled(Animated.View).attrs(({}) => ({
-  entering: SlideInUp.duration(330),
+  entering: SlideInUp.duration(500),
 }))`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 
@@ -52,7 +56,8 @@ export const AnimatedFilterBar = styled(Animated.View).attrs(({}) => ({
 
   gap: 12px;
 
-  padding: 32px;
+  padding-right: 32px;
+  padding-left: 32px;
 `;
 
 export const AnimatedDrinksList = styled(Animated.View).attrs(({}) => ({
