@@ -15,9 +15,13 @@ import { DrinkCard } from "./components/DrinkCard";
 
 import Animated, {
   SlideInRight,
+  scrollTo,
+  useAnimatedRef,
   useAnimatedScrollHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
+  withTiming,
 } from "react-native-reanimated";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(
@@ -30,18 +34,17 @@ const AnimatedSectionList = Animated.createAnimatedComponent(
 );
 
 import * as S from "./styles";
+import { DrinkTypes } from "@/@types";
 
 export default function Home() {
-  const scale = useSharedValue(1);
   const scrollY = useSharedValue(0);
+  const animatedScrollViewRef = useAnimatedRef();
 
   const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
   );
 
-  const [selectedFilter, setSelectedFilter] = useState<
-    "TRADICIONAIS" | "DOCES" | "ESPECIAIS" | ""
-  >("");
+  const [selectedFilter, setSelectedFilter] = useState<DrinkTypes | "">("");
 
   const [drinks, setDrinks] = useState<Array<{ title: ""; data: Array<any> }>>(
     require("@/mock/drinks.json")
@@ -51,21 +54,7 @@ export default function Home() {
     onScroll: (event) => {
       const horizontalScrollCoords = event.contentOffset.x;
 
-      console.log("Horizontal Scroll Coords: ", horizontalScrollCoords);
-    },
-  });
-
-  const onContentScroll = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      const verticalScrollCoords = event.contentOffset.y;
-
-      // TODO: Ao selecionar um dos filtros, usuário deverá ser
-      // redirecionado para os scrolls abaixo, dependendo de sua escolha
-      // 610.5 = Tradicionais
-      // 1448 = Doces
-      // 1983 = Especiais
-
-      console.log("Vertical Scroll Coords: ", verticalScrollCoords);
+      return horizontalScrollCoords;
     },
   });
 
@@ -73,9 +62,28 @@ export default function Home() {
     return {};
   });
 
+  function onDrinkFilterPress(filter: typeof selectedFilter) {
+    if (filter === "TRADICIONAIS") {
+      scrollY.value = withTiming(610.5, { duration: 550 });
+    }
+    if (filter === "DOCES") {
+      scrollY.value = withTiming(1448, { duration: 550 });
+    }
+    if (filter === "ESPECIAIS") {
+      scrollY.value = withTiming(1983, { duration: 550 });
+    }
+
+    setSelectedFilter(filter);
+  }
+
+  // Basicamente um React.useEffect para as animações....
+  useDerivedValue(() => {
+    scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
+  });
+
   return (
     <>
-      <S.AnimatedContainer onScroll={onContentScroll}>
+      <S.AnimatedContainer ref={animatedScrollViewRef}>
         <S.Content>
           <S.AnimatedSearchBar>
             <S.Title>
@@ -99,10 +107,7 @@ export default function Home() {
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => (
               <>
-                <RecommendationCard
-                  index={index}
-                  // style={recommendationCardStyle}
-                />
+                <RecommendationCard index={index} />
               </>
             )}
             contentContainerStyle={{ gap: 32 }}
@@ -121,21 +126,21 @@ export default function Home() {
                 title="TRADICIONAIS"
                 variant="selectable"
                 isChecked={selectedFilter === "TRADICIONAIS"}
-                onPress={() => setSelectedFilter("TRADICIONAIS")}
+                onPress={() => onDrinkFilterPress("TRADICIONAIS")}
                 style={{ flex: 1, maxWidth: 90 }}
               />
               <AppTag
                 title="DOCES"
                 variant="selectable"
                 isChecked={selectedFilter === "DOCES"}
-                onPress={() => setSelectedFilter("DOCES")}
+                onPress={() => onDrinkFilterPress("DOCES")}
                 style={{ flex: 1, maxWidth: 90 }}
               />
               <AppTag
                 title="ESPECIAIS"
                 variant="selectable"
                 isChecked={selectedFilter === "ESPECIAIS"}
-                onPress={() => setSelectedFilter("ESPECIAIS")}
+                onPress={() => onDrinkFilterPress("ESPECIAIS")}
                 style={{ flex: 1, maxWidth: 90 }}
               />
             </S.Filters>
