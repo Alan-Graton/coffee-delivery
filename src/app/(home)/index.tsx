@@ -49,7 +49,21 @@ export default function Home() {
 
   const onRecommendationsScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
+      const horizontalScrollCoords = event.contentOffset.x;
+
+      console.log("Horizontal Scroll Coords: ", horizontalScrollCoords);
+    },
+  });
+
+  const onContentScroll = useAnimatedScrollHandler({
+    onScroll: (event) => {
       const verticalScrollCoords = event.contentOffset.y;
+
+      // TODO: Ao selecionar um dos filtros, usuário deverá ser
+      // redirecionado para os scrolls abaixo, dependendo de sua escolha
+      // 610.5 = Tradicionais
+      // 1448 = Doces
+      // 1983 = Especiais
 
       console.log("Vertical Scroll Coords: ", verticalScrollCoords);
     },
@@ -61,7 +75,7 @@ export default function Home() {
 
   return (
     <>
-      <S.Container>
+      <S.AnimatedContainer onScroll={onContentScroll}>
         <S.Content>
           <S.AnimatedSearchBar>
             <S.Title>
@@ -140,7 +154,7 @@ export default function Home() {
             }}
           />
         </S.Content>
-      </S.Container>
+      </S.AnimatedContainer>
     </>
   );
 }

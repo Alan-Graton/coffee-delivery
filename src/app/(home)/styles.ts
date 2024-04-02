@@ -10,7 +10,7 @@ export const HeaderUserLocation = styled.Text`
   `}
 `;
 
-export const Container = styled.ScrollView.attrs(({}) => ({
+export const AnimatedContainer = styled(Animated.ScrollView).attrs(({}) => ({
   showsVerticalScrollIndicator: false,
 }))`
   flex: 1;
