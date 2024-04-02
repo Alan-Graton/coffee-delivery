@@ -49,37 +49,6 @@ export const CoffeeBeans = styled.Image`
   right: 0;
 `;
 
-export const AnimatedFilterBar = styled(Animated.View).attrs(({}) => ({
-  entering: SlideInDown.delay(400).duration(800),
-}))`
-  width: 100%;
-
-  gap: 12px;
-
-  padding-right: 32px;
-  padding-left: 32px;
-`;
-
-export const AnimatedDrinksList = styled(Animated.View).attrs(({}) => ({
-  entering: SlideInDown.delay(400).duration(800),
-}))``;
-
-export const FilterTitle = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.COLORS.GRAY_300};
-
-    font-size: ${theme.FONT_SIZE.TITLE_SM}px;
-    font-family: ${theme.FONT_FAMILY.HEADING};
-  `}
-`;
-
-export const Filters = styled.View`
-  flex-direction: row;
-  align-items: flex-end;
-
-  gap: 8px;
-`;
-
 export const DrinkSectionTitle = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_400};

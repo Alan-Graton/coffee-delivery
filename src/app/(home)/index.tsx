@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  SectionList,
-  View,
-} from "react-native";
+import { SectionList } from "react-native";
 
 import { AppInput } from "@/components/AppInput";
-import { AppTag } from "@/components/AppTag";
 
 import { RecommendationCard } from "./components/RecommendationCard";
 import { DrinkCard } from "./components/DrinkCard";
 
+import { DrinkTypes } from "@/@types";
+
 import Animated, {
   SlideInRight,
+  interpolate,
   scrollTo,
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -24,6 +21,9 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
+import * as S from "./styles";
+import { DrinksFilters } from "./components/DrinksFilters";
+
 const AnimatedSectionList = Animated.createAnimatedComponent(
   SectionList<
     Array<{
@@ -32,9 +32,6 @@ const AnimatedSectionList = Animated.createAnimatedComponent(
     }>
   >
 );
-
-import * as S from "./styles";
-import { DrinkTypes } from "@/@types";
 
 export default function Home() {
   const scrollY = useSharedValue(0);
@@ -53,8 +50,18 @@ export default function Home() {
   const onRecommendationsScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
       const horizontalScrollCoords = event.contentOffset.x;
+    },
+  });
 
-      return horizontalScrollCoords;
+  const onContentScroll = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      const verticalScrollCoords = event.contentOffset.y;
+
+      // Na posição 500 em Y o Filter Bar já deve ficar grudado junto com o Header
+
+      console.log("Vertical Scroll Coords: ", verticalScrollCoords);
+
+      interpolate(scrollY.value, [], []);
     },
   });
 
@@ -83,9 +90,17 @@ export default function Home() {
 
   return (
     <>
-      <S.AnimatedContainer ref={animatedScrollViewRef}>
+      <DrinksFilters
+        filter={selectedFilter}
+        handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
+      />
+
+      <S.AnimatedContainer
+        ref={animatedScrollViewRef}
+        onScroll={onContentScroll}
+      >
         <S.Content>
-          <S.AnimatedSearchBar>
+          <S.AnimatedSearchBar style={[animatedStyles]}>
             <S.Title>
               Encontre o café perfeito para {"\n"} qualquer hora do dia
             </S.Title>
@@ -119,32 +134,10 @@ export default function Home() {
             }}
           />
 
-          <S.AnimatedFilterBar>
-            <S.FilterTitle>Nossos cafés</S.FilterTitle>
-            <S.Filters>
-              <AppTag
-                title="TRADICIONAIS"
-                variant="selectable"
-                isChecked={selectedFilter === "TRADICIONAIS"}
-                onPress={() => onDrinkFilterPress("TRADICIONAIS")}
-                style={{ flex: 1, maxWidth: 90 }}
-              />
-              <AppTag
-                title="DOCES"
-                variant="selectable"
-                isChecked={selectedFilter === "DOCES"}
-                onPress={() => onDrinkFilterPress("DOCES")}
-                style={{ flex: 1, maxWidth: 90 }}
-              />
-              <AppTag
-                title="ESPECIAIS"
-                variant="selectable"
-                isChecked={selectedFilter === "ESPECIAIS"}
-                onPress={() => onDrinkFilterPress("ESPECIAIS")}
-                style={{ flex: 1, maxWidth: 90 }}
-              />
-            </S.Filters>
-          </S.AnimatedFilterBar>
+          <DrinksFilters
+            filter={selectedFilter}
+            handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
+          />
 
           <AnimatedSectionList
             sections={drinks}
