@@ -10,8 +10,12 @@ import { DrinkCard } from "./components/DrinkCard";
 import { DrinkTypes } from "@/@types";
 
 import Animated, {
+  Easing,
+  Extrapolate,
+  SlideInDown,
   SlideInRight,
   interpolate,
+  interpolateColor,
   scrollTo,
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -57,16 +61,16 @@ export default function Home() {
     onScroll: (event) => {
       const verticalScrollCoords = event.contentOffset.y;
 
-      // Na posição 500 em Y o Filter Bar já deve ficar grudado junto com o Header
+      scrollY.value = verticalScrollCoords;
 
-      console.log("Vertical Scroll Coords: ", verticalScrollCoords);
-
-      interpolate(scrollY.value, [], []);
+      console.log(scrollY.value);
     },
   });
 
-  const animatedStyles = useAnimatedStyle(() => {
-    return {};
+  const filterBarAnimatedStyles = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(scrollY.value, [0, 500], [0, 1], Extrapolate.CLAMP),
+    };
   });
 
   function onDrinkFilterPress(filter: typeof selectedFilter) {
@@ -90,17 +94,17 @@ export default function Home() {
 
   return (
     <>
-      <DrinksFilters
+      {/* <DrinksFilters
         filter={selectedFilter}
         handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
-      />
+      /> */}
 
       <S.AnimatedContainer
         ref={animatedScrollViewRef}
         onScroll={onContentScroll}
       >
         <S.Content>
-          <S.AnimatedSearchBar style={[animatedStyles]}>
+          <S.AnimatedSearchBar>
             <S.Title>
               Encontre o café perfeito para {"\n"} qualquer hora do dia
             </S.Title>
@@ -137,6 +141,7 @@ export default function Home() {
           <DrinksFilters
             filter={selectedFilter}
             handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
+            entering={SlideInDown.delay(400).duration(800)}
           />
 
           <AnimatedSectionList

@@ -2,15 +2,16 @@ import React from "react";
 
 import * as S from "./styles";
 import { DrinkTypes } from "@/@types";
+import { AnimateProps } from "react-native-reanimated";
 
-interface IProps {
+interface IProps extends AnimateProps<any> {
   filter: DrinkTypes | "";
   handleOnPress: (filter: DrinkTypes) => void;
 }
 
-export function DrinksFilters({ filter, handleOnPress }: IProps) {
+export function DrinksFilters({ filter, handleOnPress, ...rest }: IProps) {
   return (
-    <S.FilterBarContainer>
+    <S.FilterBarContainer {...rest}>
       <S.Title>Nossos cafés</S.Title>
       <S.FilterTags>
         <S.Tag

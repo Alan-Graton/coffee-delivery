@@ -4,14 +4,12 @@ import { AppTag } from "@/components/AppTag";
 
 import Animated, { SlideInDown } from "react-native-reanimated";
 
-export const FilterBarContainer = styled(Animated.View).attrs(({}) => ({
-  entering: SlideInDown.delay(400).duration(800),
-}))`
+export const FilterBarContainer = styled(Animated.View).attrs(({}) => ({}))`
   width: 100%;
 
   gap: 12px;
 
-  background-color: red;
+  /* background-color: red; */
 
   padding-right: 32px;
   padding-left: 32px;
