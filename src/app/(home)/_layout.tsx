@@ -24,10 +24,12 @@ const AnimatedScreenHeader = Animated.createAnimatedComponent(
 export default function HomeLayout() {
   const { COLORS } = useTheme();
 
+  // COLOCAR ISSO DENTRO DA VIEW , COMO VISTO NAS AULAS DA ROCKET E NA DOC DO EXPO PARA AUMENTAR A FLEXIBILDIADE DE ESTILIZAÇÃO
   return (
     <Stack
       screenOptions={{
         headerShadowVisible: false,
+        headerShown: false,
         title: "",
         header: () => (
           <AnimatedScreenHeader

@@ -64,8 +64,6 @@ export default function Home() {
       const verticalScrollCoords = event.contentOffset.y;
 
       scrollY.value = verticalScrollCoords;
-
-      console.log(scrollY.value);
     },
   });
 
@@ -86,17 +84,20 @@ export default function Home() {
       scrollY.value = withTiming(1983, { duration: 550 });
     }
 
-    scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
     setSelectedFilter(filter);
   }
 
+  // useDerivedValue(() => {
+  //   scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
+  // });
+
   return (
     <>
-      <DrinksFilters
+      {/* <DrinksFilters
         filter={selectedFilter}
         handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
         style={[{ backgroundColor: COLORS.WHITE }, filterBarAnimatedStyles]}
-      />
+      /> */}
 
       <S.AnimatedContainer
         ref={animatedScrollViewRef}
