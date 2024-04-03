@@ -27,6 +27,7 @@ import Animated, {
 
 import * as S from "./styles";
 import { DrinksFilters } from "./components/DrinksFilters";
+import { useTheme } from "styled-components/native";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(
   SectionList<
@@ -38,6 +39,7 @@ const AnimatedSectionList = Animated.createAnimatedComponent(
 );
 
 export default function Home() {
+  const { COLORS } = useTheme();
   const scrollY = useSharedValue(0);
   const animatedScrollViewRef = useAnimatedRef();
 
@@ -69,7 +71,7 @@ export default function Home() {
 
   const filterBarAnimatedStyles = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(scrollY.value, [0, 500], [0, 1], Extrapolate.CLAMP),
+      opacity: interpolate(scrollY.value, [0, 650], [0, 1], Extrapolate.CLAMP),
     };
   });
 
@@ -84,20 +86,17 @@ export default function Home() {
       scrollY.value = withTiming(1983, { duration: 550 });
     }
 
+    scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
     setSelectedFilter(filter);
   }
 
-  // Basicamente um React.useEffect para as animações....
-  useDerivedValue(() => {
-    scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
-  });
-
   return (
     <>
-      {/* <DrinksFilters
+      <DrinksFilters
         filter={selectedFilter}
         handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
-      /> */}
+        style={[{ backgroundColor: COLORS.WHITE }, filterBarAnimatedStyles]}
+      />
 
       <S.AnimatedContainer
         ref={animatedScrollViewRef}
