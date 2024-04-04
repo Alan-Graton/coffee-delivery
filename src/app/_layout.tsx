@@ -37,9 +37,11 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider theme={THEME}>
-      <AppContent />
-      <StatusBar style="light" animated />
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={THEME}>
+        <AppContent />
+      </ThemeProvider>
+      <StatusBar style="light" animated translucent />
+    </>
   );
 }
