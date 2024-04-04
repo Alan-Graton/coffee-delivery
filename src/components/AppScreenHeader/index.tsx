@@ -7,12 +7,11 @@ import {
 
 import * as S from "./styles";
 
-import { THEME } from "@/theme";
 import { useTheme } from "styled-components/native";
 
 interface IProps extends SafeAreaProviderProps {
   children?: React.ReactNode;
-  color?: keyof typeof THEME.COLORS;
+  color?: S.IHeaderBackgroundColor;
   ref?: React.ForwardedRef<any>;
 }
 

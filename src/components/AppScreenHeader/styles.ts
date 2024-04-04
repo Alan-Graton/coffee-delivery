@@ -2,8 +2,10 @@ import styled, { css } from "styled-components/native";
 
 import { THEME } from "@/theme";
 
+export type IHeaderBackgroundColor = keyof typeof THEME.COLORS;
+
 export interface IHeaderStyleProps {
-  color?: keyof typeof THEME.COLORS;
+  color?: IHeaderBackgroundColor;
 }
 
 export const Header = styled.View<IHeaderStyleProps>`
