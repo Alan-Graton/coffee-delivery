@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components/native";
 
-import Animated, { SlideInUp, SlideInDown } from "react-native-reanimated";
+import Animated, {
+  SlideInUp,
+  SlideInDown,
+  Easing,
+  FadeInUp,
+} from "react-native-reanimated";
 
 export const HeaderUserLocation = styled.Text`
   ${({ theme }) => css`
@@ -22,7 +27,7 @@ export const Content = styled.View`
 `;
 
 export const AnimatedSearchBar = styled(Animated.View).attrs(({}) => ({
-  entering: SlideInUp.duration(500),
+  entering: SlideInUp.duration(650),
 }))`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 
@@ -32,7 +37,9 @@ export const AnimatedSearchBar = styled(Animated.View).attrs(({}) => ({
   padding: 32px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Animated.Text).attrs(({}) => ({
+  entering: FadeInUp.delay(650).duration(150),
+}))`
   text-align: left;
 
   ${({ theme }) => css`
@@ -42,7 +49,9 @@ export const Title = styled.Text`
   `}
 `;
 
-export const CoffeeBeans = styled.Image`
+export const CoffeeBeans = styled(Animated.Image).attrs(({}) => ({
+  entering: FadeInUp.delay(650).duration(150),
+}))`
   position: absolute;
 
   bottom: -10px;

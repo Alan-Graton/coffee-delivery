@@ -2,18 +2,15 @@ import styled, { css } from "styled-components/native";
 
 import { AppTag } from "@/components/AppTag";
 
-import Animated, { SlideInDown } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 
 export const FilterBarContainer = styled(Animated.View).attrs(({}) => ({}))`
   width: 100%;
 
   gap: 12px;
 
-  /* background-color: red; */
-
   padding-right: 32px;
   padding-left: 32px;
-  padding-top: 16px;
   padding-bottom: 16px;
 `;
 

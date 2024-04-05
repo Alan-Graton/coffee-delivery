@@ -1,47 +1,30 @@
 import React, { useState } from "react";
 
-import { SectionList } from "react-native";
+import { DrinkTypes } from "@/@types";
 
 import { AppInput } from "@/components/AppInput";
 
+import { Header } from "./components/Header";
 import { RecommendationCard } from "./components/RecommendationCard";
 import { DrinkCard } from "./components/DrinkCard";
+import { DrinksFilters } from "./components/DrinksFilters";
 
-import { DrinkTypes } from "@/@types";
+import {
+  HomeAnimationsContext,
+  AnimatedSectionList,
+} from "./animations.context";
 
-import Animated, {
-  Easing,
-  Extrapolate,
-  SlideInDown,
-  SlideInRight,
-  interpolate,
-  interpolateColor,
-  scrollTo,
-  useAnimatedRef,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
+import Animated, { SlideInDown, SlideInRight } from "react-native-reanimated";
 
 import * as S from "./styles";
-import { DrinksFilters } from "./components/DrinksFilters";
-import { useTheme } from "styled-components/native";
-
-const AnimatedSectionList = Animated.createAnimatedComponent(
-  SectionList<
-    Array<{
-      title: "";
-      data: Array<{ drink: string; description: string; price: number }>;
-    }>
-  >
-);
 
 export default function Home() {
-  const { COLORS } = useTheme();
-  const scrollY = useSharedValue(0);
-  const animatedScrollViewRef = useAnimatedRef();
+  const {
+    animatedScrollViewRef,
+    searchBarAnimatedStyles,
+    onContentScroll,
+    onRecommendationsScroll,
+  } = React.useContext(HomeAnimationsContext);
 
   const [recommended, setRecommended] = useState<Array<any>>(
     Array.from({ length: 5 })
@@ -53,58 +36,41 @@ export default function Home() {
     require("@/mock/drinks.json")
   );
 
-  const onRecommendationsScroll = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      const horizontalScrollCoords = event.contentOffset.x;
-    },
-  });
+  // Vou deixar essa animação por último. Vou ter que usar uma ref normal, para que não haja
+  // conflito entre as animações da ScrollView
 
-  const onContentScroll = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      const verticalScrollCoords = event.contentOffset.y;
+  /**
+   * Opções para implementação da animão do Header
+   * e do campo de busca:
+   *
+   * 1. Deletar arquivo _layout, e construir o Header aqui dentro
+   *    <S.AnimatedSearchBar /> e <DrinkFilters /> permaneceriam onde estão
+   *    e sofreriam suas mudanças de animações com os hooks e estilos do Reanimated (Um pouco mais demorado pra testar) []
+   *
+   * 2. Fazer um Header do zero, sem usar o _layout (Desabilitando o Header). Implementação das animações iriam
+   *    pelo mesmo caminho que o ponto acima. (Mais rápido para testar) []
+   *
+   * 3. Continuar como está, e deixar o mais simples possível (nem deveria ser uma opção...) (vai ficar um caos)
+   */
 
-      scrollY.value = verticalScrollCoords;
-    },
-  });
-
-  const filterBarAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scrollY.value, [0, 650], [0, 1], Extrapolate.CLAMP),
-    };
-  });
-
-  function onDrinkFilterPress(filter: typeof selectedFilter) {
-    if (filter === "TRADICIONAIS") {
-      scrollY.value = withTiming(610.5, { duration: 550 });
-    }
-    if (filter === "DOCES") {
-      scrollY.value = withTiming(1448, { duration: 550 });
-    }
-    if (filter === "ESPECIAIS") {
-      scrollY.value = withTiming(1983, { duration: 550 });
-    }
-
-    setSelectedFilter(filter);
-  }
-
-  // useDerivedValue(() => {
-  //   scrollTo(animatedScrollViewRef, 0, scrollY.value, true);
-  // });
+  /**
+   * ANIMAÇÕES DO HEADER
+   *
+   * Container: SlideUp (Descendo)
+   * Pin e ShoppingCard: Opacidade
+   * Title, Search Input e Img: SlideDown (Subindo)
+   */
 
   return (
     <>
-      {/* <DrinksFilters
-        filter={selectedFilter}
-        handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
-        style={[{ backgroundColor: COLORS.WHITE }, filterBarAnimatedStyles]}
-      /> */}
-
       <S.AnimatedContainer
         ref={animatedScrollViewRef}
         onScroll={onContentScroll}
       >
+        <Header />
+
         <S.Content>
-          <S.AnimatedSearchBar>
+          <S.AnimatedSearchBar style={[searchBarAnimatedStyles]}>
             <S.Title>
               Encontre o café perfeito para {"\n"} qualquer hora do dia
             </S.Title>
@@ -132,15 +98,20 @@ export default function Home() {
             contentContainerStyle={{ gap: 32 }}
             style={{
               paddingHorizontal: 32,
-              paddingVertical: 16,
+              paddingTop: 16,
               position: "relative",
               top: -60,
             }}
           />
 
+          {/* ANIMAÇÕES PENDENTES: 
+              1. Segundo o Phind AI, eu poderia alterar o TranslateY, para que o component
+                  fique grudado junto com o Header
+              2. Posso utilizar um segundo <DrinksFilter /> fora do ScrollView, e alterar a visibilidade
+                  de acordo com a necessidade
+           */}
           <DrinksFilters
             filter={selectedFilter}
-            handleOnPress={(tagFilter) => onDrinkFilterPress(tagFilter)}
             entering={SlideInDown.delay(400).duration(800)}
           />
 

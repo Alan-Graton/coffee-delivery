@@ -6,7 +6,7 @@ import { AnimateProps } from "react-native-reanimated";
 
 interface IProps extends AnimateProps<any> {
   filter: DrinkTypes | "";
-  handleOnPress: (filter: DrinkTypes) => void;
+  handleOnPress?: (filter: DrinkTypes) => void;
 }
 
 export function DrinksFilters({ filter, handleOnPress, ...rest }: IProps) {
@@ -17,17 +17,17 @@ export function DrinksFilters({ filter, handleOnPress, ...rest }: IProps) {
         <S.Tag
           title="TRADICIONAIS"
           isChecked={filter === "TRADICIONAIS"}
-          onPress={() => handleOnPress("TRADICIONAIS")}
+          onPress={() => handleOnPress?.("TRADICIONAIS")}
         />
         <S.Tag
           title="DOCES"
           isChecked={filter === "DOCES"}
-          onPress={() => handleOnPress("DOCES")}
+          onPress={() => handleOnPress?.("DOCES")}
         />
         <S.Tag
           title="ESPECIAIS"
           isChecked={filter === "ESPECIAIS"}
-          onPress={() => handleOnPress("ESPECIAIS")}
+          onPress={() => handleOnPress?.("ESPECIAIS")}
         />
       </S.FilterTags>
     </S.FilterBarContainer>
