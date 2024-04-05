@@ -75,6 +75,12 @@ export function HomeAnimationsProvider({ children }: IProps) {
         [0, 490],
         [COLORS.GRAY_100, COLORS.WHITE]
       ),
+      borderBottomWidth: interpolate(scrollY.value, [0, 490], [0, 1]),
+      borderBottomColor: interpolateColor(
+        scrollY.value,
+        [0, 490],
+        ["transparent", COLORS.GRAY_900]
+      ),
     };
   });
 
@@ -99,9 +105,7 @@ export function HomeAnimationsProvider({ children }: IProps) {
   });
 
   const filterBarAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scrollY.value, [0, 650], [0, 1], Extrapolate.CLAMP),
-    };
+    return {};
   });
 
   function onDrinkFilterPress(
