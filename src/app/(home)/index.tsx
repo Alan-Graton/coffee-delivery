@@ -53,14 +53,6 @@ export default function Home() {
    * 3. Continuar como está, e deixar o mais simples possível (nem deveria ser uma opção...) (vai ficar um caos)
    */
 
-  /**
-   * ANIMAÇÕES DO HEADER
-   *
-   * Container: SlideUp (Descendo)
-   * Pin e ShoppingCard: Opacidade
-   * Title, Search Input e Img: SlideDown (Subindo)
-   */
-
   return (
     <>
       <S.AnimatedContainer

@@ -1,7 +1,8 @@
 import React from "react";
 
-import * as S from "./styles";
 import { DrinkTypes } from "@/@types";
+
+import * as S from "./styles";
 import { AnimateProps } from "react-native-reanimated";
 
 interface IProps extends AnimateProps<any> {
